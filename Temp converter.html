@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 5px;
+        }
+
+        .form-group input[type="submit"] {
+            background-color: #4CAF50;
+            color: brown;
+            cursor: pointer;
+        }
+
+        .form-group input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Temperature Converter</h1>
+        <form id="converterForm">
+            <div class="form-group">
+                <label for="celsius">Celsius:</label>
+                <input type="number" id="celsius" name="celsius" placeholder="Enter temperature in Celsius" required>
+            </div>
+            <div class="form-group">
+                <label for="fahrenheit">Fahrenheit:</label>
+                <input type="number" id="fahrenheit" name="fahrenheit" placeholder="Enter temperature in Fahrenheit" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Convert">
+            </div>
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById("converterForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            var celsiusInput = document.getElementById("celsius");
+            var fahrenheitInput = document.getElementById("fahrenheit");
+            var resultElement = document.getElementById("result");
+
+            var celsius = parseFloat(celsiusInput.value);
+            var fahrenheit = parseFloat(fahrenheitInput.value);
+
+            if (!isNaN(celsius)) {
+                var convertedFahrenheit = (celsius * 9/5) + 32;
+                fahrenheitInput.value = convertedFahrenheit.toFixed(2);
+                resultElement.textContent = celsius + " degrees Celsius is equal to " + convertedFahrenheit.toFixed(2) + " degrees Fahrenheit.";
+            } else if (!isNaN(fahrenheit)) {
+                var convertedCelsius = (fahrenheit - 32) * 5/9;
+                celsiusInput.value = convertedCelsius.toFixed(2);
+                resultElement.textContent = fahrenheit + " degrees Fahrenheit is equal to " + convertedCelsius.toFixed(2) + " degrees Celsius.";
+            } else {
+                resultElement.textContent = "Please enter a valid temperature.";
+            }
+        });
+    </script>
+</body>
+</html>
